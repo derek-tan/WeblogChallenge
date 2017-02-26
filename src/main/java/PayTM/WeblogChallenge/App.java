@@ -49,7 +49,7 @@ public class App
 			}
         }).filter(new Function<LogEntry, Boolean>() {
 			public Boolean call(LogEntry entry) throws Exception {
-				// Assumption 1 - non-200 code requests are not considered valid hits
+				// Assumption 1 - non-200 code requests are not considered as valid hits
 				// Assumption 2 - static resource requests are not page visits/valid hits
 				// Assumption 3 - all static resources are in the path /offer/*
 				if (entry.getBackendCode() != 200 || entry.getLbCode() != 200) {
