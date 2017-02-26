@@ -65,7 +65,7 @@ public class App
         // Register logEntryDF as a temporary view
         logEntryDF.createOrReplaceTempView("LogEntry");
 
-        // Assume a session duration is 15 mins (15 * 60 * 1000 = 1800000)
+        // Assume a session duration is 15 mins (15 * 60 * 1000 = 900000)
         // newSession [boolean] = LAG(timestamp) = null or timestamp - LAG(timestamp) > 900000 THEN 1 ELSE 0
         String newSessionSelection = "CASE WHEN (LAG(timestamp) OVER (PARTITION BY clientIP ORDER BY timestamp) IS NULL) OR (timestamp - LAG(timestamp) OVER (PARTITION BY clientIP ORDER BY timestamp) > 900000) THEN 1 ELSE 0 END AS newSession";
         String newSessionQuery = "SELECT timestamp, clientIP, requestURL, " + newSessionSelection + " FROM LogEntry";
